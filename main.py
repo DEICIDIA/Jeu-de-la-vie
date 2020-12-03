@@ -1,7 +1,9 @@
 from random import *
 
 tabCel = [[randint(0,1) for x in range (5)]for y in range (5)]  
-print(tabCel)
+
+def init(lst):
+    tabCel = lst[:]
 
 def verifPossible(x, y, tabCel):
 
@@ -37,15 +39,15 @@ def killCel(_x, _y, _tabCel):
 def bornCel(_x, _y, _tabCel): 
     _tabCel[_x][_y] = 0
 
-def nextStep(): 
-    tabCompteur = getTabCompteur(tabCel)
+def nextStep(tab): 
+    tabCompteur = getTabCompteur(tab)
     for i in range(len(tabCompteur)): 
         for j in range(len(tabCompteur[i])):
             if(tabCompteur[i][j] > 3 or tabCompteur[i][j] < 2 ):
-                tabCel[i][j] = 0
+                tab[i][j] = 0
             elif(tabCompteur[i][j] == 3): 
-                tabCel[i][j] = 1
-    print(tabCel)
+                tab[i][j] = 1
+    return tab
             
 
 def getTabCompteur(_tabCel):
@@ -57,7 +59,7 @@ def getTabCompteur(_tabCel):
     return tabCompteur
 
         
-print(nextStep())
+#print(nextStep())
 #print(getTabCompteur(tabCel))     
 #print(countCelAliveAround(1,1,tabCel))
 
