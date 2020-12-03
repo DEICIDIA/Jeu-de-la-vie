@@ -5,21 +5,17 @@ import numpy as np
 app = Flask(__name__)
 
 def str_mat(str, hauteur, largeur):
+
     tab = [[0]* hauteur] * largeur
-
-    print(str)
-
     index_str = 0
 
     for i in range(largeur):
         for j in range(hauteur):
 
-            tab[i][j] = int(str.index(index_str)
+            tab[i][j] = int(str[index_str])
             index_str += 1
 
-
-    print(tab)
-    
+    return tab    
 
 @app.route('/')
 def index():
@@ -32,7 +28,8 @@ def draw():
     hauteur = int(request.args.get('hauteur', default = ''))
     largeur = int(request.args.get('largeur', default = ''))
 
-    str_mat(matrice2, hauteur, largeur)
+    matrice = str_mat(matrice2, hauteur, largeur)
+    print(matrice)
 
     return "nan"
 
