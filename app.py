@@ -4,7 +4,22 @@ import numpy as np
 
 app = Flask(__name__)
 
-matrice = np.zeros((5,5))
+def str_mat(str, hauteur, largeur):
+    tab = [[0]* hauteur] * largeur
+
+    print(str)
+
+    index_str = 0
+
+    for i in range(largeur):
+        for j in range(hauteur):
+
+            tab[i][j] = str[index_str]
+            index_str += 1
+
+
+    print(tab)
+    
 
 @app.route('/')
 def index():
@@ -14,7 +29,10 @@ def index():
 def draw():
 
     matrice2 = request.args.get('matrice', default = '')
-    print(matrice2)
+    hauteur = int(request.args.get('hauteur', default = ''))
+    largeur = int(request.args.get('largeur', default = ''))
+
+    str_mat(matrice2, hauteur, largeur)
 
     return "nan"
 

@@ -107,7 +107,7 @@
     </style>
 
     <script type="text/javascript">
-        function drawGrid(rows, cols) {
+        function drawGrid(cols, rows) {
 
             this.cols = cols;
             this.rows = rows;
@@ -118,6 +118,7 @@
                 for (var y = 0; y < cols; y++) {
                     Text = document.createElement("li"); // Create text to go inside with string value of i
                     Text.setAttribute("class", "dot");
+                    Text.setAttribute("value", "0");
                     NewP.appendChild(Text); // Add text to p element
 
                 }
@@ -125,15 +126,20 @@
             }
         }
 
-        drawGrid(30, 30);
+
+        var hauteur = 10
+        var largeur = 15
+
+        drawGrid(hauteur, largeur);
 
 
-        console.log(document.getElementsByClassName("dot"))
 
         $('.dot').click(function() {
             $(this).fadeTo(100, 0.9, 'linear', function() {
                 // Animation complete.
                 $(this).css('border-radius', '0%');
+                $(this).val("1")
+                    //console.log($(this).css('background'));
             });
         });
 
@@ -161,8 +167,23 @@
 
 
         function play() {
+
+            var matrice = ""
+
+            $('.dot').each(function(index) {
+                if ($(this).val() == "0") {
+                    matrice += "0";
+                } else {
+                    matrice += "1";
+                };
+            });
+
+            console.log(matrice);
+
             $.get('/draw', {
-                'matrice': test
+                'matrice': matrice,
+                'hauteur': hauteur,
+                'largeur': largeur
             });
         }
     </script>
