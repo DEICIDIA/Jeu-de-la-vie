@@ -14,7 +14,7 @@ def str_mat(str, hauteur, largeur):
     for i in range(largeur):
         for j in range(hauteur):
 
-            tab[i][j] = str[index_str]
+            tab[i][j] = int(str.index(index_str)
             index_str += 1
 
 
