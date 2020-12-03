@@ -2,7 +2,9 @@ import webbrowser
 from flask import Flask, Response, request, render_template, jsonify
 
 app = Flask(__name__)
-matrice = [[1, 0, 1], [0, 0, 1], [1, 0, 0]]
+
+matrice = "1" * 1000
+print(matrice)
 
 @app.route('/')
 def index():
@@ -10,6 +12,7 @@ def index():
 
 @app.route('/draw')
 def draw():
+
 
     reponse = app.response_class(matrice, status = 200)
     return reponse 

@@ -3,17 +3,40 @@
 
 <head>
     <title>Jeu de la vie</title>
+    <script src="static/jquery.min.js"></script>
 </head>
 
 <body style="font-size: 20px; background-color: #312e2b;">
 
     <button class="button" onclick=next()>next</button>
-    <button class="button" onclick=next()>play</button>
-    <button class="button" onclick=next()>pause</button>
+    <button class="button" onclick=play()>play</button>
+    <button class="button" onclick=pause()>pause</button>
+
+    <div>
+        <center>
+            <canvas width=500 height=500 id="canvas"></canvas>
+        </center>
+    </div>
 
     <script type="text/javascript">
         function next() {
-            console.log("test")
+            $.get('/draw', function(r) {
+                drawGrid(r)
+            });
+        }
+
+        function drawGrid(r) {
+            var string = r;
+            var ctx = document.getElementById("canvas").getContext('2d');
+            ctx.fillStyle = "#FFF"; // Fill with white first
+            ctx.fillRect(0, 0, 1000, 1000);
+            ctx.fillStyle = "#000";
+            for (var i = 0; i < 100; i++) { // Loop through each character
+                for (var j = 0; j < 100; j++) {
+                    if (string[i * 100 + j] == '1') // If the character is one,
+                        ctx.fillRect(i * 10, j * 10, 1, 1); // fill the pixel with black
+                }
+            }
         }
     </script>
 </body>
