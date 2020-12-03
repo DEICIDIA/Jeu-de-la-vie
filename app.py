@@ -1,10 +1,10 @@
 import webbrowser
 from flask import Flask, Response, request, render_template, jsonify
+import numpy as np  
 
 app = Flask(__name__)
 
-matrice = "1" * 1000
-print(matrice)
+matrice = np.zeros((5,5))
 
 @app.route('/')
 def index():
@@ -13,9 +13,10 @@ def index():
 @app.route('/draw')
 def draw():
 
+    matrice2 = request.args.get('matrice', default = '')
+    print(matrice2)
 
-    reponse = app.response_class(matrice, status = 200)
-    return reponse 
+    return "nan"
 
 
 app.run(debug = True)

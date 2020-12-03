@@ -2,41 +2,168 @@
 <html>
 
 <head>
+
     <title>Jeu de la vie</title>
     <script src="static/jquery.min.js"></script>
+
 </head>
 
 <body style="font-size: 20px; background-color: #312e2b;">
 
-    <button class="button" onclick=next()>next</button>
     <button class="button" onclick=play()>play</button>
     <button class="button" onclick=pause()>pause</button>
+    <button class="button" onclick=reset()>reset</button>
 
     <div>
-        <center>
-            <canvas width=500 height=500 id="canvas"></canvas>
-        </center>
+        <div class="wrapper" id="pute">
+            <p style="margin-top:20px;"></p>
+        </div>
     </div>
 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .wrapper {
+            margin-left: 20%;
+            margin-top: 2em;
+            display: block;
+        }
+        
+        ul {
+            list-style: none;
+            display: inline-block;
+        }
+        
+        .dot,
+        ul li {
+            width: 1em;
+            height: 1em;
+            margin: 3px;
+        }
+        
+        .dot {
+            background: #ccc;
+            border-radius: 50%;
+            cursor: pointer;
+            -webkit-transition: all 1.5s ease;
+            -moz-transition: all 1.5s ease;
+            -o-transition: all 1.5s ease;
+            transition: all 1.5s ease;
+        }
+        
+        .quadrado {
+            background: #000;
+            border-radius: 0%;
+        }
+        
+        body {
+            background: #fff;
+            animation: bgfade 5s;
+            -webkit-animation: bgfade 5s;
+            /* Safari and Chrome */
+        }
+        
+        @keyframes bgfade {
+            0% {
+                opacity: 0;
+            }
+            25% {
+                opacity: 0.25;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            75% {
+                opacity: 0.75;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        
+        @-webkit-keyframes bgfade
+        /* Safari and Chrome */
+        
+        {
+            0% {
+                opacity: 0;
+            }
+            25% {
+                opacity: 0.25;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            75% {
+                opacity: 0.75;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+
     <script type="text/javascript">
-        function next() {
-            $.get('/draw', function(r) {
-                drawGrid(r)
-            });
+        function drawGrid(rows, cols) {
+
+            this.cols = cols;
+            this.rows = rows;
+
+            for (var i = 0; i < rows; i++) {
+                NewP = document.createElement("ul"); // Create a p element
+                NewP.setAttribute("id", "row" + i)
+                for (var y = 0; y < cols; y++) {
+                    Text = document.createElement("li"); // Create text to go inside with string value of i
+                    Text.setAttribute("class", "dot");
+                    NewP.appendChild(Text); // Add text to p element
+
+                }
+                document.getElementById("pute").appendChild(NewP); // Append newly-created p element to body element in DOM tree
+            }
         }
 
-        function drawGrid(r) {
-            var string = r;
-            var ctx = document.getElementById("canvas").getContext('2d');
-            ctx.fillStyle = "#FFF"; // Fill with white first
-            ctx.fillRect(0, 0, 1000, 1000);
-            ctx.fillStyle = "#000";
-            for (var i = 0; i < 100; i++) { // Loop through each character
-                for (var j = 0; j < 100; j++) {
-                    if (string[i * 100 + j] == '1') // If the character is one,
-                        ctx.fillRect(i * 10, j * 10, 1, 1); // fill the pixel with black
-                }
-            }
+        drawGrid(30, 30);
+
+
+        console.log(document.getElementsByClassName("dot"))
+
+        $('.dot').click(function() {
+            $(this).fadeTo(100, 0.9, 'linear', function() {
+                // Animation complete.
+                $(this).css('border-radius', '0%');
+            });
+        });
+
+        $('.dot').click(function() {
+            $(this).css({
+                background: '#20B2AA'
+            });
+
+        });
+
+        $(".dot").click(function() {
+            $(this).animate({
+                borderRadius: '10px'
+            });
+        });
+
+        $('.dot').click(function() {
+            $(this).css({
+                background: '#66CDAA'
+            });
+
+        });
+
+        var test = "test";
+
+
+        function play() {
+            $.get('/draw', {
+                'matrice': test
+            });
         }
     </script>
 </body>
