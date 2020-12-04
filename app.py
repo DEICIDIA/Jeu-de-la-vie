@@ -29,9 +29,9 @@ def draw():
 
     new_matrice = main.nextStep(matrice)
     string = ""
-    
-    for i in range(largeur):
-        for j in range(hauteur):
+
+    for j in range(hauteur):
+        for i in range(largeur):
             string += str(new_matrice[i][j]) 
 
     print(new_matrice)

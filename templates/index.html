@@ -11,8 +11,6 @@
 <body style="font-size: 20px; background-color: #312e2b;">
 
     <button class="button" onclick=play()>play</button>
-    <button class="button" onclick=next()>next</button>
-    <button class="button" onclick=reset()>reset</button>
 
     <div>
         <div class="wrapper" id="pute">
@@ -127,8 +125,8 @@
         }
 
 
-        var hauteur = 20
-        var largeur = 20
+        var hauteur = 10
+        var largeur = 10
 
         drawGrid(hauteur, largeur);
 
@@ -138,7 +136,7 @@
 
             if ($(this).val() == "0") {
 
-                $(this).fadeTo(100, 0.9, 'linear', function() {
+                $(this).fadeTo(50, 0.9, 'linear', function() {
                     // Animation complete.
                     $(this).css('border-radius', '0%');
                     $(this).val("1")
@@ -166,10 +164,7 @@
                 $(this).css('border-radius', '50%');
                 $(this).val("0")
 
-
             }
-
-
 
         });
 
@@ -197,8 +192,36 @@
 
                 console.log(r)
                 $('.dot').each(function(index) {
+
                     $(this).val(r[index]);
-                    $(this).click();
+
+                    if ($(this).val() == "1") {
+
+                        $(this).fadeTo(50, 0.9, 'linear', function() {
+                            $(this).css('border-radius', '0%');
+                        });
+
+                        $(this).css({
+                            background: '#20B2AA'
+                        });
+
+                        $(this).css({
+                            background: '#66CDAA'
+                        });
+
+                        $(this).animate({
+                            borderRadius: '10px'
+                        });
+
+                    } else {
+
+                        $(this).css({
+                            background: "#ccc"
+                        });
+
+                        $(this).css('border-radius', '50%');
+
+                    };
                 });
 
             });
