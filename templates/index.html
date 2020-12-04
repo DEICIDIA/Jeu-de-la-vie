@@ -15,10 +15,13 @@
     </div>
 
     <div style="margin-left: 26%;">
-        <a href="#" class="btn btn-white btn-animate" onclick=play()>NEXT</a>
+        <a href="#" id="next" class="btn btn-white btn-animate" onclick=play()>NEXT</a>
     </div>
     <div style="margin-left: auto; margin-right: 37.5%;">
         <a href="#" id="trilebg" class="btn btn-white btn-animate" onclick=auto()>AUTO</a>
+    </div>
+    <div style="margin-left: auto; margin-right: 55.5%;">
+        <a href="#" class="btn btn-white btn-animate" onclick=clean()>CLEAR</a>
     </div>
 
 
@@ -202,12 +205,17 @@
         }
 
 
-        var hauteur = 15
-        var largeur = 15
+        var hauteur = 15;
+        var largeur = 15;
 
         drawGrid(hauteur, largeur);
 
-
+        function clean() {
+            $('.dot').each(function(index) {
+                $(this).val("0");
+            });
+            play();
+        }
 
         $('.dot').click(function() {
 
@@ -216,16 +224,12 @@
                 $(this).fadeTo(10, 0.9, 'linear', function() {
                     // Animation complete.
                     $(this).css('border-radius', '0%');
-                    $(this).val("1")
-                        //console.log($(this).css('background'));
+                    $(this).val("1");
+                    //console.log($(this).css('background'));
                 });
 
                 $(this).css({
-                    background: '#20B2AA'
-                });
-
-                $(this).css({
-                    background: '#66CDAA'
+                    background: '#f35f58'
                 });
 
                 $(this).animate({
@@ -239,7 +243,7 @@
                 });
 
                 $(this).css('border-radius', '50%');
-                $(this).val("0")
+                $(this).val("0");
 
             }
 
@@ -265,9 +269,8 @@
             }, 500);
         }
 
-        var test = "test";
-
         function play() {
+
 
             var matrice = ""
 
@@ -279,15 +282,12 @@
                 };
             });
 
-            console.log(matrice);
-
             $.get('/draw', {
                 'matrice': matrice,
                 'hauteur': hauteur,
                 'largeur': largeur
             }, function(r) {
 
-                console.log(r)
                 $('.dot').each(function(index) {
 
                     $(this).val(r[index]);
@@ -299,11 +299,7 @@
                         });
 
                         $(this).css({
-                            background: '#20B2AA'
-                        });
-
-                        $(this).css({
-                            background: '#66CDAA'
+                            background: '#f35f58'
                         });
 
                         $(this).animate({
