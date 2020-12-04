@@ -6,14 +6,14 @@
 
 ## LANCER LE JEU 
 
-1) Dans un terminal executer la commande : 
+1) Lancer l'application : 
 ```
 $ python app.py 
 $ python3 app.py
 ```
-2) Puis installer Flask : 
+2) Installer Flask : 
 ```
 $ pip install flask 
 $ pip3 install flask
 ```
-2) Cliquer sur le liens suivant : http://127.0.0.1:5000/ 
+2) Ouvrir l'application en cliquant sur le lien : http://127.0.0.1:5000/ 
