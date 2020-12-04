@@ -127,39 +127,49 @@
         }
 
 
-        var hauteur = 3
-        var largeur = 3
+        var hauteur = 20
+        var largeur = 20
 
         drawGrid(hauteur, largeur);
 
 
 
         $('.dot').click(function() {
-            $(this).fadeTo(100, 0.9, 'linear', function() {
-                // Animation complete.
-                $(this).css('border-radius', '0%');
-                $(this).val("1")
-                    //console.log($(this).css('background'));
-            });
-        });
 
-        $('.dot').click(function() {
-            $(this).css({
-                background: '#20B2AA'
-            });
+            if ($(this).val() == "0") {
 
-        });
+                $(this).fadeTo(100, 0.9, 'linear', function() {
+                    // Animation complete.
+                    $(this).css('border-radius', '0%');
+                    $(this).val("1")
+                        //console.log($(this).css('background'));
+                });
 
-        $(".dot").click(function() {
-            $(this).animate({
-                borderRadius: '10px'
-            });
-        });
+                $(this).css({
+                    background: '#20B2AA'
+                });
 
-        $('.dot').click(function() {
-            $(this).css({
-                background: '#66CDAA'
-            });
+                $(this).css({
+                    background: '#66CDAA'
+                });
+
+                $(this).animate({
+                    borderRadius: '10px'
+                });
+
+            } else {
+
+                $(this).css({
+                    background: "#ccc"
+                });
+
+                $(this).css('border-radius', '50%');
+                $(this).val("0")
+
+
+            }
+
+
 
         });
 
@@ -183,7 +193,17 @@
                 'matrice': matrice,
                 'hauteur': hauteur,
                 'largeur': largeur
+            }, function(r) {
+
+                console.log(r)
+                $('.dot').each(function(index) {
+                    $(this).val(r[index]);
+                    $(this).click();
+                });
+
             });
+
+
         }
     </script>
 </body>

@@ -2,8 +2,6 @@ from random import *
 
 tabCel = [[randint(0,1) for x in range (5)]for y in range (5)]  
 
-def init(lst):
-    tabCel = lst[:]
 
 def verifPossible(x, y, tabCel):
 
