@@ -24,9 +24,7 @@ def draw():
     matrice2 = request.args.get('matrice', default = '')
     hauteur = int(request.args.get('hauteur', default = ''))
     largeur = int(request.args.get('largeur', default = ''))
-
     matrice = str_mat(matrice2, hauteur, largeur)
-
     new_matrice = main.nextStep(matrice)
     string = ""
 
@@ -34,9 +32,6 @@ def draw():
         for i in range(largeur):
             string += str(new_matrice[i][j]) 
 
-    print(new_matrice)
-
     return string
-
 
 app.run(debug = True)
