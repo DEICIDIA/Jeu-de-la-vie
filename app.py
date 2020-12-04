@@ -8,7 +8,7 @@ app = Flask(__name__)
 def str_mat(str, hauteur, largeur):
 
     tab = [[0]*hauteur for i in range(largeur)]
-
+   
     for i in range(len(str)):
         tab[i%largeur][i//hauteur] = int(str[i])
 
